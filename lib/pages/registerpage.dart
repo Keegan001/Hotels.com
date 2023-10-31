@@ -2,7 +2,7 @@ import 'package:app1/pages/landingpage.dart';
 import 'package:app1/pages/navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'homepage.dart';
+//import 'homepage.dart';
 import 'package:flutter/material.dart';
 
 class RegScreen extends StatefulWidget {

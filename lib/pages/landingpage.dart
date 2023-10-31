@@ -2,7 +2,8 @@ import 'package:app1/pages/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-import 'homepage.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+//import 'homepage.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -59,12 +60,7 @@ class _MainScreenState extends State<MainScreen> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(200),
             ),
-            child: const Center(
-              child: Icon(
-                Icons.login,
-                size: 60,
-              ),
-            ),
+            child: Center(child: SvgPicture.asset("assets/loginimage.svg")),
           ),
           Padding(
             padding: EdgeInsets.all(10),
