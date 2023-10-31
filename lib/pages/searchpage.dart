@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class homePage extends StatefulWidget {
-  const homePage({super.key});
+class searchPage extends StatefulWidget {
+  const searchPage({super.key});
 
   @override
-  State<homePage> createState() => _homePageState();
+  State<searchPage> createState() => _searchPageState();
 }
 
-class _homePageState extends State<homePage> {
+class _searchPageState extends State<searchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Hotels',
+        title: const Text(
+          'Search Hotels',
           style: TextStyle(
             color: Colors.black,
             fontSize: 20,

@@ -1,3 +1,4 @@
+import 'package:app1/pages/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +20,6 @@ class _MainScreenState extends State<MainScreen> {
     emailcontroller.dispose();
     password.dispose();
     super.dispose();
-    
   }
 
   @override
@@ -38,9 +38,7 @@ class _MainScreenState extends State<MainScreen> {
         centerTitle: true,
         elevation: 0.0,
         leading: GestureDetector(
-          onTap: () {
-          
-          },
+          onTap: () {},
           child: Container(
             margin: const EdgeInsets.all(10),
             alignment: Alignment.center,
@@ -101,11 +99,12 @@ class _MainScreenState extends State<MainScreen> {
                 final mail = emailcontroller.text;
                 final pass = password.text;
 
-                FirebaseAuth.instance.signInWithEmailAndPassword(
-                    email: mail, password: pass);
+                FirebaseAuth.instance
+                    .signInWithEmailAndPassword(email: mail, password: pass);
                 final user = FirebaseAuth.instance.currentUser;
                 if (user != Null) {
-                  Navigator.push(context,MaterialPageRoute(builder: (context) =>  homePage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => navbar()));
                 }
               },
               child: Text(
@@ -119,5 +118,3 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-
-

@@ -1,3 +1,5 @@
+import 'package:app1/pages/landingpage.dart';
+import 'package:app1/pages/navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'homepage.dart';
@@ -101,7 +103,8 @@ class _RegScreenState extends State<RegScreen> {
                     email: mail, password: pass);
                 final user = FirebaseAuth.instance.currentUser;
                 if (user != Null) {
-                  Navigator.push(context,MaterialPageRoute(builder: (context) =>  homePage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => navbar()));
                 }
               },
               child: Text(
@@ -109,6 +112,20 @@ class _RegScreenState extends State<RegScreen> {
                 style: TextStyle(color: Colors.white, fontSize: 25),
               ),
             ),
+          ),
+          const SizedBox(height: 10),
+          TextButton(
+            child: Text('Already Have An Account?'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return MainScreen();
+                  },
+                ),
+              );
+            },
           )
         ],
       ),

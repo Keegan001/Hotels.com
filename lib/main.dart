@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Splash Screen',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.purple,
       ),
       home: const Screen(),
       debugShowCheckedModeBanner: false,
@@ -42,13 +42,17 @@ class _ScreenState extends State<Screen> {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen.withScreenFunction(
         screenFunction: () async {
-          return MainScreen();
+          if (FirebaseAuth.instance.currentUser != null) {
+            return MainScreen();
+          } else {
+            return RegScreen();
+          }
         },
         duration: 3000,
         splash: Icons.area_chart_outlined,
         splashTransition: SplashTransition.slideTransition,
         //pageTransitionType: PageTransitionType.downToUp,
-        backgroundColor: Colors.greenAccent);
+        backgroundColor: Colors.purpleAccent);
   }
 }
 

@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 
-class homePage extends StatefulWidget {
-  const homePage({super.key});
+class profilePage extends StatelessWidget {
+  const profilePage({super.key});
 
-  @override
-  State<homePage> createState() => _homePageState();
-}
-
-class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Hotels',
+        title: const Text(
+          'Your Profile',
           style: TextStyle(
             color: Colors.black,
             fontSize: 20,
