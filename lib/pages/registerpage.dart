@@ -1,9 +1,10 @@
 import 'package:app1/pages/landingpage.dart';
 import 'package:app1/pages/navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_core/firebase_core.dart';
 //import 'homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class RegScreen extends StatefulWidget {
   RegScreen({super.key});
@@ -13,12 +14,13 @@ class RegScreen extends StatefulWidget {
 }
 
 class _RegScreenState extends State<RegScreen> {
-  final emailcontroller = TextEditingController();
-  final password = TextEditingController();
+  final _emailcontroller = TextEditingController();
+  final _password = TextEditingController();
+  final _auth = FirebaseAuth.instance;
   @override
   void dispose() {
-    emailcontroller.dispose();
-    password.dispose();
+    _emailcontroller.dispose();
+    _password.dispose();
     super.dispose();
   }
 
@@ -59,52 +61,81 @@ class _RegScreenState extends State<RegScreen> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(200),
             ),
-            child: Center(
-              child: Icon(
-                Icons.app_registration,
-                size: 60,
+            child: SizedBox(
+              height: 400,
+              width: 300,
+              child: SvgPicture.asset(
+                "assets/registerimage.svg",
               ),
             ),
           ),
           Padding(
             padding: EdgeInsets.all(10),
             child: TextField(
-              controller: emailcontroller,
+              controller: _emailcontroller,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                hintStyle: TextStyle(color: Colors.white),
+                labelStyle: TextStyle(color: Colors.white),
+                filled: true,
+                fillColor: Colors.purple,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
+                ),
                 labelText: 'User Name',
                 hintText: 'Enter Mail Id',
-                prefixIcon: Icon(Icons.mail),
+                prefixIcon: Icon(
+                  Icons.mail,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
           Padding(
             padding: EdgeInsets.all(10),
             child: TextField(
-              controller: password,
+              controller: _password,
               obscureText: true,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                hintStyle: TextStyle(color: Colors.white),
+                labelStyle: TextStyle(color: Colors.white),
+                filled: true,
+                fillColor: Colors.purple,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
+                ),
                 labelText: 'Password',
                 hintText: 'Enter your password',
-                prefixIcon: Icon(Icons.lock),
+                prefixIcon: Icon(
+                  Icons.lock,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(0),
+            padding: EdgeInsets.all(10),
             child: ElevatedButton(
-              onPressed: () {
-                final mail = emailcontroller.text;
-                final pass = password.text;
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              onPressed: () async {
+                final mail = _emailcontroller.text;
+                final pass = _password.text;
+                try {
+                  final user = await _auth.createUserWithEmailAndPassword(
+                      email: mail, password: pass);
 
-                FirebaseAuth.instance.createUserWithEmailAndPassword(
-                    email: mail, password: pass);
-                final user = FirebaseAuth.instance.currentUser;
-                if (user != Null) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => navbar()));
+                  if (user != Null) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => navbar()));
+                  }
+                } catch (e) {
+                  print(e);
                 }
               },
               child: Text(

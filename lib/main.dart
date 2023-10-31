@@ -1,8 +1,8 @@
 import 'package:app1/pages/registerpage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'pages/landingpage.dart';
+//import 'pages/landingpage.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -42,11 +42,7 @@ class _ScreenState extends State<Screen> {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen.withScreenFunction(
         screenFunction: () async {
-          if (FirebaseAuth.instance.currentUser != null) {
-            return MainScreen();
-          } else {
-            return RegScreen();
-          }
+          return RegScreen();
         },
         duration: 3000,
         splash: Icons.area_chart_outlined,
@@ -67,4 +63,10 @@ class _ScreenState extends State<Screen> {
     },
   );
 }
+
+if (FirebaseAuth.instance.currentUser != null) {
+            return MainScreen();
+          } else {
+            return RegScreen();
+          }
 */

@@ -13,13 +13,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final emailcontroller = TextEditingController();
-  final password = TextEditingController();
+  final _loginemailcontroller = TextEditingController();
+  final _loginpassword = TextEditingController();
+  final _auth = FirebaseAuth.instance;
 
   @override
   void dispose() {
-    emailcontroller.dispose();
-    password.dispose();
+    _loginemailcontroller.dispose();
+    _loginpassword.dispose();
     super.dispose();
   }
 
@@ -65,42 +66,71 @@ class _MainScreenState extends State<MainScreen> {
           Padding(
             padding: EdgeInsets.all(10),
             child: TextField(
-              controller: emailcontroller,
+              controller: _loginemailcontroller,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                hintStyle: TextStyle(color: Colors.white),
+                labelStyle: TextStyle(color: Colors.white),
+                filled: true,
+                fillColor: Colors.purple,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
+                ),
                 labelText: 'User Name',
                 hintText: 'Enter Mail Id',
-                prefixIcon: Icon(Icons.mail),
+                prefixIcon: Icon(
+                  Icons.mail,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
           Padding(
             padding: EdgeInsets.all(10),
             child: TextField(
-              controller: password,
+              controller: _loginpassword,
               obscureText: true,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                hintStyle: TextStyle(color: Colors.white),
+                labelStyle: TextStyle(color: Colors.white),
+                filled: true,
+                fillColor: Colors.purple,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
+                ),
                 labelText: 'Password',
                 hintText: 'Enter your password',
-                prefixIcon: Icon(Icons.lock),
+                prefixIcon: Icon(
+                  Icons.lock,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(0),
+            padding: EdgeInsets.all(10),
             child: ElevatedButton(
-              onPressed: () {
-                final mail = emailcontroller.text;
-                final pass = password.text;
-
-                FirebaseAuth.instance
-                    .signInWithEmailAndPassword(email: mail, password: pass);
-                final user = FirebaseAuth.instance.currentUser;
-                if (user != Null) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => navbar()));
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              onPressed: () async {
+                final mail = _loginemailcontroller.text;
+                final pass = _loginpassword.text;
+                User? user;
+                try {
+                  UserCredential userCredential = await _auth
+                      .signInWithEmailAndPassword(email: mail, password: pass);
+                  user = userCredential.user;
+                  if (user != Null) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => navbar()));
+                  }
+                } on FirebaseAuthException catch (e) {
+                  print(e);
                 }
               },
               child: Text(
@@ -108,7 +138,7 @@ class _MainScreenState extends State<MainScreen> {
                 style: TextStyle(color: Colors.white, fontSize: 25),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
