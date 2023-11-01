@@ -32,7 +32,7 @@ class _navbarState extends State<navbar> {
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentindex,
-        backgroundColor: Colors.purpleAccent,
+        backgroundColor: const Color.fromARGB(255, 248, 206, 255),
         elevation: 0.0,
         height: 80,
         onDestinationSelected: (value) {

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class profilePage extends StatelessWidget {
   const profilePage({super.key});
@@ -25,25 +26,32 @@ class profilePage extends StatelessWidget {
         children: [
           SizedBox(
             height: 300,
-            width: 400,
-            child: Center(
-              child: CircleAvatar(
-                backgroundColor: Colors.grey,
-                radius: 100,
-                child: Icon(Icons.person),
+            width: 300,
+            child: Container(
+              alignment: Alignment.center,
+              child: Center(
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey,
+                  radius: 100,
+                  child: SvgPicture.asset(
+                    'assets/person.svg',
+                    height: 180,
+                    width: 180,
+                  ),
+                ),
               ),
             ),
           ),
           SizedBox(
-            
             height: 200,
             child: Card(
-                child: Column(
-              children: [
-                Text(email),
-              ],
-            ),),
-          )
+              child: Text(
+                '\n Your e-mail is $email',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
         ],
       ),
     );
