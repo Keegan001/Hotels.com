@@ -1,8 +1,8 @@
+import 'package:app1/pages/navbar.dart';
 import 'package:app1/pages/registerpage.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-//import 'pages/landingpage.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -24,49 +24,60 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const Screen(),
+      home: const AuthenticationWrapper(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class Screen extends StatefulWidget {
-  const Screen({super.key});
+class AuthenticationWrapper extends StatefulWidget {
+  const AuthenticationWrapper({super.key});
 
   @override
-  State<Screen> createState() => _ScreenState();
+  _AuthenticationWrapperState createState() => _AuthenticationWrapperState();
 }
 
-class _ScreenState extends State<Screen> {
+class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
+  @override
+  void initState() {
+    super.initState();
+    checkUserAuthentication();
+  }
+
+  void checkUserAuthentication() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        // User is not authenticated, show the splash screen and then navigate to the registration screen
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => AnimatedSplashScreen.withScreenFunction(
+              screenFunction: () async {
+                return RegScreen();
+              },
+              duration: 3000,
+              splash: Icons.area_chart_outlined,
+              splashTransition: SplashTransition.slideTransition,
+              backgroundColor: Colors.purpleAccent,
+            ),
+          ),
+        );
+      } else {
+        // User is authenticated, navigate to the landing page
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => Navbar(),
+          ),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AnimatedSplashScreen.withScreenFunction(
-        screenFunction: () async {
-          return RegScreen();
-        },
-        duration: 3000,
-        splash: Icons.area_chart_outlined,
-        splashTransition: SplashTransition.slideTransition,
-        //pageTransitionType: PageTransitionType.downToUp,
-        backgroundColor: Colors.purpleAccent);
+    return Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
 }
-
-/*authstate() {
-  FirebaseAuth.instance.authStateChanges().listen(
-    (User? user) {
-      if (user == null) {
-        RegScreen();
-      } else {
-        MainScreen();
-      }
-    },
-  );
-}
-
-if (FirebaseAuth.instance.currentUser != null) {
-            return MainScreen();
-          } else {
-            return RegScreen();
-          }
-*/

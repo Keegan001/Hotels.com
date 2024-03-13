@@ -1,7 +1,6 @@
-import 'package:app1/pages/navbar.dart';
+import 'package:app1/pages/Navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 //import 'homepage.dart';
 
@@ -127,7 +126,7 @@ class _MainScreenState extends State<MainScreen> {
                   user = userCredential.user;
                   if (user != Null) {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => navbar()));
+                        MaterialPageRoute(builder: (context) => Navbar()));
                   }
                 } on FirebaseAuthException catch (e) {
                   print(e);

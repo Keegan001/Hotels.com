@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'homepage.dart';
+import 'HomePage.dart';
 import 'searchpage.dart';
 import 'profilepage.dart';
 
-class navbar extends StatefulWidget {
-  const navbar({super.key});
+class Navbar extends StatefulWidget {
+  const Navbar({super.key});
 
   @override
-  State<navbar> createState() => _navbarState();
+  State<Navbar> createState() => _NavbarState();
 }
 
-class _navbarState extends State<navbar> {
+class _NavbarState extends State<Navbar> {
   int currentindex = 0;
   PageController pC = PageController(initialPage: 0);
   @override
@@ -25,7 +25,7 @@ class _navbarState extends State<navbar> {
           });
         },
         children: [
-          homePage(),
+          HomePage(),
           searchPage(),
           profilePage(),
         ],

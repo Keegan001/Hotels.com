@@ -1,8 +1,6 @@
 import 'package:app1/pages/landingpage.dart';
 import 'package:app1/pages/navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:firebase_core/firebase_core.dart';
-//import 'homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -17,12 +15,14 @@ class _RegScreenState extends State<RegScreen> {
   final _emailcontroller = TextEditingController();
   final _password = TextEditingController();
   final _auth = FirebaseAuth.instance;
+
   @override
   void dispose() {
     _emailcontroller.dispose();
     _password.dispose();
     super.dispose();
   }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -124,40 +124,74 @@ class _RegScreenState extends State<RegScreen> {
                 ),
               ),
               onPressed: () async {
-                final mail = _emailcontroller.text;
-                final pass = _password.text;
-                try {
-                  final user = await _auth.createUserWithEmailAndPassword(
-                      email: mail, password: pass);
+                final mail = _emailcontroller.text.trim(); // Trim whitespace
+                final pass = _password.text.trim();
 
-                  if (user != Null) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => navbar()));
+                // Basic Input Validation
+                if (mail.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please enter an email address'),
+                    ),
+                  );
+                  return;
+                }
+
+                if (pass.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please enter a password'),
+                    ),
+                  );
+                  return;
+                }
+
+                // Register the user with Firebase
+                try {
+                  final userCredential = await _auth.createUserWithEmailAndPassword(
+                    email: mail,
+                    password: pass,
+                  );
+
+                  // Navigate to the landing page on successful registration
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MainScreen(),
+                    ),
+                  );
+                } on FirebaseAuthException catch (e) {
+                  if (e.code == 'weak-password') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('The password provided is too weak.'),
+                      ),
+                    );
+                  } else if (e.code == 'email-already-in-use') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('The account already exists for that email.'),
+                      ),
+                    );
                   }
                 } catch (e) {
-                  print(e);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Error: $e'),
+                    ),
+                  );
                 }
               },
               child: Text(
                 'Register',
-                style: TextStyle(color: Colors.white, fontSize: 25),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
-          const SizedBox(height: 10),
-          TextButton(
-            child: Text('Already Have An Account?'),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return MainScreen();
-                  },
-                ),
-              );
-            },
-          )
         ],
       ),
     );
