@@ -1,5 +1,4 @@
 import 'package:app1/pages/landingpage.dart';
-import 'package:app1/pages/navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,7 +21,6 @@ class _RegScreenState extends State<RegScreen> {
     _password.dispose();
     super.dispose();
   }
- 
 
   @override
   Widget build(BuildContext context) {
@@ -145,15 +143,12 @@ class _RegScreenState extends State<RegScreen> {
                   );
                   return;
                 }
-
-                // Register the user with Firebase
                 try {
-                  final userCredential = await _auth.createUserWithEmailAndPassword(
+                  final userCredential =
+                      await _auth.createUserWithEmailAndPassword(
                     email: mail,
                     password: pass,
                   );
-
-                  // Navigate to the landing page on successful registration
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -170,7 +165,8 @@ class _RegScreenState extends State<RegScreen> {
                   } else if (e.code == 'email-already-in-use') {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('The account already exists for that email.'),
+                        content:
+                            Text('The account already exists for that email.'),
                       ),
                     );
                   }
@@ -185,12 +181,25 @@ class _RegScreenState extends State<RegScreen> {
               child: Text(
                 'Register',
                 style: TextStyle(
-                  color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          ElevatedButton(
+            child: Text('Already have an account?'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MainScreen(),
+                ),
+              );
+            },
           ),
         ],
       ),

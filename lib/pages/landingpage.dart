@@ -26,34 +26,37 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Login',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        elevation: 0.0,
-        leading: GestureDetector(
-          onTap: () {},
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            height: 22,
-            width: 22,
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   title: const Text(
+      //     'Login',
+      //     style: TextStyle(
+      //       color: Colors.black,
+      //       fontSize: 20,
+      //       fontWeight: FontWeight.bold,
+      //     ),
+      //   ),
+      //   backgroundColor: Colors.white,
+      //   centerTitle: true,
+      //   elevation: 0.0,
+      //   leading: GestureDetector(
+      //     onTap: () {},
+      //     child: Container(
+      //       margin: const EdgeInsets.all(10),
+      //       alignment: Alignment.center,
+      //       decoration: BoxDecoration(
+      //         color: Colors.white,
+      //         borderRadius: BorderRadius.circular(10),
+      //       ),
+      //       height: 22,
+      //       width: 22,
+      //     ),
+      //   ),
+      // ),
       body: Column(
         children: [
+          SizedBox(
+            height: 40,
+          ),
           Container(
             height: 150.0,
             width: 190.0,

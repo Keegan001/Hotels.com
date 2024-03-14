@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'HomePage.dart';
-import 'searchpage.dart';
-import 'profilepage.dart';
+import 'SearchPage.dart';
+import 'ProfilePage.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({super.key});
@@ -26,8 +26,8 @@ class _NavbarState extends State<Navbar> {
         },
         children: [
           HomePage(),
-          searchPage(),
-          profilePage(),
+          SearchPage(),
+          ProfilePage(),
         ],
       ),
       bottomNavigationBar: NavigationBar(

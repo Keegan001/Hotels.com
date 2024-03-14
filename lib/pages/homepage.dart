@@ -12,21 +12,24 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     String CITYNAME = 'Mumbai';
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Hotels',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        elevation: 0.0,
-      ),
+      // appBar: AppBar(
+      //   title: Text(
+      //     'Hotels',
+      //     style: TextStyle(
+      //       color: Colors.black,
+      //       fontSize: 20,
+      //       fontWeight: FontWeight.bold,
+      //     ),
+      //   ),
+      //   backgroundColor: Colors.white,
+      //   centerTitle: true,
+      //   elevation: 0.0,
+      // ),
       body: Column(
         children: [
+          SizedBox(
+            height: 40,
+          ),
           SizedBox(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -44,24 +47,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 80,
-          ),
-          SizedBox(
-            height: 100,
-            width: 500,
-            child: Card(
-              elevation: 0.0,
-              child: Text(
-                'Best Hotels in $CITYNAME',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40,
-                ),
-                textAlign: TextAlign.center,
               ),
             ),
           ),
