@@ -2,7 +2,6 @@ import 'package:app1/pages/Navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-//import 'homepage.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -26,35 +25,9 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text(
-      //     'Login',
-      //     style: TextStyle(
-      //       color: Colors.black,
-      //       fontSize: 20,
-      //       fontWeight: FontWeight.bold,
-      //     ),
-      //   ),
-      //   backgroundColor: Colors.white,
-      //   centerTitle: true,
-      //   elevation: 0.0,
-      //   leading: GestureDetector(
-      //     onTap: () {},
-      //     child: Container(
-      //       margin: const EdgeInsets.all(10),
-      //       alignment: Alignment.center,
-      //       decoration: BoxDecoration(
-      //         color: Colors.white,
-      //         borderRadius: BorderRadius.circular(10),
-      //       ),
-      //       height: 22,
-      //       width: 22,
-      //     ),
-      //   ),
-      // ),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           Container(
@@ -66,13 +39,13 @@ class _MainScreenState extends State<MainScreen> {
             child: Center(child: SvgPicture.asset("assets/loginimage.svg")),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: TextField(
               controller: _loginemailcontroller,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                hintStyle: TextStyle(color: Colors.white),
-                labelStyle: TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white),
+                labelStyle: const TextStyle(color: Colors.white),
                 filled: true,
                 fillColor: Colors.purple,
                 border: OutlineInputBorder(
@@ -81,7 +54,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 labelText: 'User Name',
                 hintText: 'Enter Mail Id',
-                prefixIcon: Icon(
+                prefixIcon: const Icon(
                   Icons.mail,
                   color: Colors.white,
                 ),
@@ -89,13 +62,13 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: TextField(
               controller: _loginpassword,
               obscureText: true,
               decoration: InputDecoration(
-                hintStyle: TextStyle(color: Colors.white),
-                labelStyle: TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white),
+                labelStyle: const TextStyle(color: Colors.white),
                 filled: true,
                 fillColor: Colors.purple,
                 border: OutlineInputBorder(
@@ -104,7 +77,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 labelText: 'Password',
                 hintText: 'Enter your password',
-                prefixIcon: Icon(
+                prefixIcon: const Icon(
                   Icons.lock,
                   color: Colors.white,
                 ),
@@ -112,7 +85,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -128,14 +101,16 @@ class _MainScreenState extends State<MainScreen> {
                       .signInWithEmailAndPassword(email: mail, password: pass);
                   user = userCredential.user;
                   if (user != Null) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Navbar()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Navbar()));
                   }
                 } on FirebaseAuthException catch (e) {
                   print(e);
                 }
               },
-              child: Text(
+              child: const Text(
                 'Login',
                 style: TextStyle(color: Colors.white, fontSize: 25),
               ),

@@ -52,7 +52,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
           MaterialPageRoute(
             builder: (context) => AnimatedSplashScreen.withScreenFunction(
               screenFunction: () async {
-                return RegScreen();
+                return const RegScreen();
               },
               duration: 3000,
               splash: Icons.area_chart_outlined,
@@ -64,7 +64,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
       } else {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => Navbar(),
+            builder: (context) => const Navbar(),
           ),
         );
       }
@@ -73,7 +73,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(),
       ),

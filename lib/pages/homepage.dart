@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
             height: 50,
           ),
           SizedBox(
-            height: 350,
+            height: 300,
             child: FutureBuilder<HotelData>(
               future: fetchHotels('304554'),
               builder: (context, snapshot) {
@@ -56,10 +56,31 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, index) {
                       final hotel = hotels[index];
                       return SizedBox(
-                        height: 250,
                         width: 350,
                         child: Card(
-                          child: Text(hotel.name ?? ''),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              image: DecorationImage(
+                                alignment: Alignment.topCenter,
+                                image: NetworkImage(hotel
+                                        .photo?.images?.large?.url ??
+                                    'https://img.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-5529.jpg?w=740&t=st=1710549756~exp=1710550356~hmac=3bc8f614cff33dac8abc1ef5112ec83bb06f8e70fd99a782edf79ffdcc7d1304'),
+                              ),
+                            ),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Text(
+                                hotel.name ?? '',
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       );
                     },
@@ -75,6 +96,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
 Future<HotelData> fetchHotels(String locationId) async {
   var apikey = '76e798ced1msh85028291dc6a219p1775bejsn08175e183865';
   final url = Uri.parse('https://worldwide-hotels.p.rapidapi.com/search');
@@ -83,7 +105,6 @@ Future<HotelData> fetchHotels(String locationId) async {
     'language': 'en_US',
     'currency': 'USD',
   };
-
 
   final response = await http.post(
     url,

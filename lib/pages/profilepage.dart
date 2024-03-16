@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
       await FirebaseAuth.instance.signOut();
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => MainScreen(),
+          builder: (context) => const MainScreen(),
         ),
       );
     } catch (e) {
@@ -29,22 +29,9 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text(
-      //     'Your Profile',
-      //     style: TextStyle(
-      //       color: Colors.black,
-      //       fontSize: 20,
-      //       fontWeight: FontWeight.bold,
-      //     ),
-      //   ),
-      //   backgroundColor: Colors.white,
-      //   centerTitle: true,
-      //   elevation: 0.0,
-      // ),
       body: ListView(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           SizedBox(
@@ -71,15 +58,16 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Text(
                 '\n Your e-mail is $email',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20),
+                style:const TextStyle(fontSize: 20),
               ),
             ),
           ),
           SizedBox(
             child: Card(
               child: ElevatedButton(
-                child: Text('Sign Out'),
+                
                 onPressed: _signOut,
+                child: const Text('Sign Out'),
               ),
             ),
           )

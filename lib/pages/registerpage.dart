@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class RegScreen extends StatefulWidget {
-  RegScreen({super.key});
+  const RegScreen({super.key});
 
   @override
   State<RegScreen> createState() => _RegScreenState();
@@ -68,13 +68,13 @@ class _RegScreenState extends State<RegScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding:const EdgeInsets.all(10),
             child: TextField(
               controller: _emailcontroller,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                hintStyle: TextStyle(color: Colors.white),
-                labelStyle: TextStyle(color: Colors.white),
+                hintStyle:const TextStyle(color: Colors.white),
+                labelStyle:const TextStyle(color: Colors.white),
                 filled: true,
                 fillColor: Colors.purple,
                 border: OutlineInputBorder(
@@ -91,13 +91,13 @@ class _RegScreenState extends State<RegScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding:const EdgeInsets.all(10),
             child: TextField(
               controller: _password,
               obscureText: true,
               decoration: InputDecoration(
-                hintStyle: TextStyle(color: Colors.white),
-                labelStyle: TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white),
+                labelStyle: const TextStyle(color: Colors.white),
                 filled: true,
                 fillColor: Colors.purple,
                 border: OutlineInputBorder(
@@ -106,7 +106,7 @@ class _RegScreenState extends State<RegScreen> {
                 ),
                 labelText: 'Password',
                 hintText: 'Enter your password',
-                prefixIcon: Icon(
+                prefixIcon: const Icon(
                   Icons.lock,
                   color: Colors.white,
                 ),
@@ -114,7 +114,7 @@ class _RegScreenState extends State<RegScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding:  const EdgeInsets.all(10),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -122,10 +122,9 @@ class _RegScreenState extends State<RegScreen> {
                 ),
               ),
               onPressed: () async {
-                final mail = _emailcontroller.text.trim(); // Trim whitespace
+                final mail = _emailcontroller.text.trim();
                 final pass = _password.text.trim();
 
-                // Basic Input Validation
                 if (mail.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -152,7 +151,7 @@ class _RegScreenState extends State<RegScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MainScreen(),
+                      builder: (context) => const MainScreen(),
                     ),
                   );
                 } on FirebaseAuthException catch (e) {
@@ -178,7 +177,7 @@ class _RegScreenState extends State<RegScreen> {
                   );
                 }
               },
-              child: Text(
+              child: const Text(
                 'Register',
                 style: TextStyle(
                   fontSize: 18,
@@ -187,16 +186,16 @@ class _RegScreenState extends State<RegScreen> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           ElevatedButton(
-            child: Text('Already have an account?'),
+            child: const Text('Already have an account?'),
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MainScreen(),
+                  builder: (context) => const MainScreen(),
                 ),
               );
             },

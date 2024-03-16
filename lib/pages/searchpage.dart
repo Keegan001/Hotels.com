@@ -12,7 +12,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  var _query = TextEditingController();
+  final _query = TextEditingController();
   var query = '';
   var lolol = '';
   List<dynamic> hotels = [];
@@ -32,14 +32,14 @@ class _SearchPageState extends State<SearchPage> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             TextFormField(
               decoration: InputDecoration(
                 hintText: 'City Name',
-                hintStyle: TextStyle(color: Colors.white),
-                labelStyle: TextStyle(color: Colors.white),
+                hintStyle:const TextStyle(color: Colors.white),
+                labelStyle:const TextStyle(color: Colors.white),
                 filled: true,
                 fillColor: Colors.purple,
                 border: OutlineInputBorder(
@@ -61,7 +61,6 @@ class _SearchPageState extends State<SearchPage> {
 
                         final l = loc[0];
                         lolol = l.resultObject!.locationId ?? '';
-                        print(lolol);
                         final hotelData = await fetchHotels(lolol);
 
                         if (hotelData != null) {
@@ -111,7 +110,16 @@ class _SearchPageState extends State<SearchPage> {
                           height: 150,
                           child: Card(
                             child: DecoratedBox(
-                              child: Align(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  alignment: Alignment.centerLeft,
+                                  image: NetworkImage(hotel
+                                          .photo.images.small.url ??
+                                      'https://img.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-5529.jpg?w=740&t=st=1710549756~exp=1710550356~hmac=3bc8f614cff33dac8abc1ef5112ec83bb06f8e70fd99a782edf79ffdcc7d1304'),
+                                
+                                ),
+                              ),
+                            child: Align(
                                 alignment: Alignment.topRight,
                                 child: SizedBox(
                                   width: 250,
@@ -119,7 +127,7 @@ class _SearchPageState extends State<SearchPage> {
                                     children: [
                                       Text(
                                         hotel.name ?? '',
-                                        style: TextStyle(
+                                        style:const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 15),
                                       ),
@@ -129,14 +137,6 @@ class _SearchPageState extends State<SearchPage> {
                                           'Hotel Rating: ${hotel.rating ?? ''}')
                                     ],
                                   ),
-                                ),
-                              ),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  alignment: Alignment.centerLeft,
-                                  image: NetworkImage(hotel
-                                          .photo.images.small.url ??
-                                      'https://img.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-5529.jpg?w=740&t=st=1710549756~exp=1710550356~hmac=3bc8f614cff33dac8abc1ef5112ec83bb06f8e70fd99a782edf79ffdcc7d1304'),
                                 ),
                               ),
                             ),
