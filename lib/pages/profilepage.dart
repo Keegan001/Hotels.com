@@ -58,14 +58,13 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Text(
                 '\n Your e-mail is $email',
                 textAlign: TextAlign.center,
-                style:const TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20),
               ),
             ),
           ),
           SizedBox(
             child: Card(
               child: ElevatedButton(
-                
                 onPressed: _signOut,
                 child: const Text('Sign Out'),
               ),

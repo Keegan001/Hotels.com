@@ -37,9 +37,10 @@ class _SearchPageState extends State<SearchPage> {
             ),
             TextFormField(
               decoration: InputDecoration(
+                floatingLabelBehavior: FloatingLabelBehavior.never,
                 hintText: 'City Name',
-                hintStyle:const TextStyle(color: Colors.white),
-                labelStyle:const TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white),
+                labelStyle: const TextStyle(color: Colors.white),
                 filled: true,
                 fillColor: Colors.purple,
                 border: OutlineInputBorder(
@@ -47,42 +48,29 @@ class _SearchPageState extends State<SearchPage> {
                   borderSide: BorderSide.none,
                 ),
                 suffixIcon: IconButton(
-                    icon: const Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    ),
-                    onPressed: () async {
-                      query = _query.text;
-                      _query.clear();
+                  icon: const Icon(
+                    Icons.search,
+                    color: Colors.black,
+                  ),
+                  onPressed: () async {
+                    query = _query.text;
+                    _query.clear();
 
-                      final locData = await fetchCities(query);
-                      if (locData != null) {
-                        final loc = locData.results?.data ?? [];
+                    final locData = await fetchCities(query);
 
-                        final l = loc[0];
-                        lolol = l.resultObject!.locationId ?? '';
-                        final hotelData = await fetchHotels(lolol);
+                    final loc = locData.results?.data ?? [];
 
-                        if (hotelData != null) {
-                          if (hotelData != null) {
-                            setState(() {
-                              hotels = hotelData.results?.data ??
-                                  []; // Update the hotels state variable
-                            });
-                            // Display location and hotel details here
+                    final l = loc[0];
+                    lolol = l.resultObject!.locationId ?? '';
+                    final hotelData = await fetchHotels(lolol);
 
-                            print('Location name: ${l.resultObject!.name}');
-                            for (final hotel in hotels) {
-                              print('Hotel name: ${hotel.name}');
-                            }
-                          } else {
-                            print(
-                                'Error fetching hotels for ${l.resultObject!.name}');
-                          }
-                        }
-                      }
-                      ;
-                    }),
+                    setState(
+                      () {
+                        hotels = hotelData.results?.data ?? [];
+                      },
+                    );
+                  },
+                ),
               ),
               controller: _query,
             ),
@@ -116,10 +104,9 @@ class _SearchPageState extends State<SearchPage> {
                                   image: NetworkImage(hotel
                                           .photo.images.small.url ??
                                       'https://img.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-5529.jpg?w=740&t=st=1710549756~exp=1710550356~hmac=3bc8f614cff33dac8abc1ef5112ec83bb06f8e70fd99a782edf79ffdcc7d1304'),
-                                
                                 ),
                               ),
-                            child: Align(
+                              child: Align(
                                 alignment: Alignment.topRight,
                                 child: SizedBox(
                                   width: 250,
@@ -127,7 +114,7 @@ class _SearchPageState extends State<SearchPage> {
                                     children: [
                                       Text(
                                         hotel.name ?? '',
-                                        style:const TextStyle(
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 15),
                                       ),

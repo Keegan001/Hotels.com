@@ -32,8 +32,6 @@ class _NavbarState extends State<Navbar> {
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentindex,
-        backgroundColor: const Color.fromARGB(255, 248, 206, 255),
-        elevation: 0.0,
         height: 80,
         onDestinationSelected: (value) {
           pC.animateToPage(

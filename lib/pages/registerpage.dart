@@ -73,6 +73,7 @@ class _RegScreenState extends State<RegScreen> {
               controller: _emailcontroller,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
+                floatingLabelBehavior: FloatingLabelBehavior.never,
                 hintStyle:const TextStyle(color: Colors.white),
                 labelStyle:const TextStyle(color: Colors.white),
                 filled: true,
@@ -96,6 +97,7 @@ class _RegScreenState extends State<RegScreen> {
               controller: _password,
               obscureText: true,
               decoration: InputDecoration(
+                floatingLabelBehavior: FloatingLabelBehavior.never,
                 hintStyle: const TextStyle(color: Colors.white),
                 labelStyle: const TextStyle(color: Colors.white),
                 filled: true,

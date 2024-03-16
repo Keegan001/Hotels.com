@@ -1,5 +1,6 @@
 import 'package:app1/pages/navbar.dart';
 import 'package:app1/pages/registerpage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -23,6 +24,10 @@ class MyApp extends StatelessWidget {
       title: 'Splash Screen',
       theme: ThemeData(
         primarySwatch: Colors.purple,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: Color.fromARGB(255, 248, 206, 255),
+          elevation: 0.0,
+        ),
       ),
       home: const AuthenticationWrapper(),
       debugShowCheckedModeBanner: false,
@@ -47,7 +52,6 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
   void checkUserAuthentication() {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
-        // User is not authenticated, show the splash screen and then navigate to the registration screen
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => AnimatedSplashScreen.withScreenFunction(

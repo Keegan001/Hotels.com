@@ -16,6 +16,12 @@ class _MainScreenState extends State<MainScreen> {
   final _auth = FirebaseAuth.instance;
 
   @override
+  void initState() {
+    
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _loginemailcontroller.dispose();
     _loginpassword.dispose();
@@ -44,6 +50,7 @@ class _MainScreenState extends State<MainScreen> {
               controller: _loginemailcontroller,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
+                floatingLabelBehavior: FloatingLabelBehavior.never,
                 hintStyle: const TextStyle(color: Colors.white),
                 labelStyle: const TextStyle(color: Colors.white),
                 filled: true,
@@ -67,6 +74,7 @@ class _MainScreenState extends State<MainScreen> {
               controller: _loginpassword,
               obscureText: true,
               decoration: InputDecoration(
+                floatingLabelBehavior: FloatingLabelBehavior.never,
                 hintStyle: const TextStyle(color: Colors.white),
                 labelStyle: const TextStyle(color: Colors.white),
                 filled: true,
