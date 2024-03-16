@@ -47,6 +47,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
   void checkUserAuthentication() {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
+        // User is not authenticated, show the splash screen and then navigate to the registration screen
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => AnimatedSplashScreen.withScreenFunction(

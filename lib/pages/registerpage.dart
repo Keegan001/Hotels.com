@@ -83,7 +83,7 @@ class _RegScreenState extends State<RegScreen> {
                 ),
                 labelText: 'User Name',
                 hintText: 'Enter Mail Id',
-                prefixIcon: Icon(
+                prefixIcon: const Icon(
                   Icons.mail,
                   color: Colors.white,
                 ),
